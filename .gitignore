@@ -11,7 +11,7 @@ dist/
 venv/
 
 # Generated figures
-fig/*.png
+# fig/*.png
 
 # Editor- and OS-specific files
 .vscode/settings.json
