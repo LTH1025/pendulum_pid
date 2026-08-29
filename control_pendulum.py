@@ -83,7 +83,7 @@ def main() -> None:
     with mujoco.viewer.launch_passive(
         model=model,
         data=data,
-        show_left_ui=False,
+        show_left_ui=True,
         show_right_ui=False,
     ) as viewer:
         mujoco.mjv_defaultFreeCamera(model, viewer.cam)
