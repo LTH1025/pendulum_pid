@@ -1,0 +1,10 @@
+name: pendulum-pid
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - matplotlib==3.11.1
+      - mujoco==3.10.0
+      - numpy==2.4.6

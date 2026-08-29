@@ -1,0 +1,35 @@
+<mujoco>
+	<option gravity="0 0 -9.81"/>
+
+	<visual>
+		<map zfar="30"/>
+		<rgba haze=".15 .25 .35 1"/>
+	</visual>
+
+	<asset>
+		<texture type="skybox" builtin="gradient"
+			rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512"/>
+		<texture name="grid" type="2d" builtin="checker" width="512" height="512"
+			rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
+		<material name="grid" texture="grid" texrepeat="1 1"
+			texuniform="true" reflectance=".2"/>
+	</asset>
+
+	<worldbody>
+		<light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+		<geom type="plane" size="0 0 0.1" material="grid"/>
+		<body pos="0 0 2" euler="0 180 0">
+			<joint name="pin" type="hinge" axis="0 -1 0" pos="0 0 0.5"/>
+			<geom type="cylinder" size=".05 .5" rgba="0 .9 0 1" mass="1"/>
+		</body>
+	</worldbody>
+	
+	<actuator>
+		<motor joint="pin" name="torque" gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+	</actuator>
+
+	<sensor>
+		<jointpos joint="pin" noise="0.2"/>
+		<jointvel joint="pin" noise="1"/>
+	</sensor>
+</mujoco>

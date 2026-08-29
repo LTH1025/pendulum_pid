@@ -1,0 +1,19 @@
+# Python caches and build artifacts
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+
+# Local environments
+.conda/
+.venv/
+venv/
+
+# Generated figures
+fig/*.png
+
+# Editor- and OS-specific files
+.vscode/settings.json
+.DS_Store
+*.swp

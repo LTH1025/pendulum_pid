@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Pendulum Controller",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/control_pendulum.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        }
+    ]
+}
