@@ -1,0 +1,57 @@
+# Work Summary — A Personal MuJoCo Cart-Double-Pendulum Swing-Up Experiment
+
+This folder records an assisted personal experiment in **MuJoCo (v3.12.0) on Ubuntu 24.04 (VMware)**,
+carried out with the help of an AI assistant. The physical system studied here is a
+**cart double pendulum** driven by a single horizontal force applied to the cart along a
+linear guide rail (coordinate `x`), unlike a torque-actuated acrobot. The two-link chain
+hangs jointed at the cart and at the middle joint, and the only control input is the
+horizontal cart force.
+
+---
+
+## 1. Goal
+
+Starting from the double pendulum hanging straight down, drive it **up to the fully
+inverted (upright) position in one continuous motion** — without any full-circle rotations
+or flinging — and then try to **hold it balanced upright**. The cart is free to travel
+along `x`; no fixed set-point is required.
+
+## 2. What was built and done (assistant-assisted)
+
+### 2.1 Simulation model (`asset/pendulum.xml`)
+Built and iterated on a MuJoCo XML scene: a cart constrained to a linear rail plus two
+revolute-jointed links, with the horizontal cart force as the single actuator.
+
+### 2.2 Controller design (`control_pendulum.py`)
+Implemented a PD controller (“PID-control learning”, `Ki = 0`), where the torque/force is
+computed in Python from the position and angular-velocity errors and applied to the cart.
+Structured the control as state-feedback (
+`-KP·x − KD·vx − DP1·dq1 …`) to pump energy during swing-up and to switch toward balancing.
+Reached a swing-up-and-capture pipeline that reliably raises the links to the upright region,
+with the best capture near perfect upright (small deviation, small angular velocity).
+
+### 2.3 Simulation & visualization
+Ran the closed-loop simulation in MuJoCo’s viewer and logged state/torque trajectories.
+Confirmed the GUI/simulate fetch can only start from the VM desktop (no DISPLAY from a
+headless CLI), and the passive viewer is used for inspection.
+This folder’s **`Animation for the output.gif`** is the recorded animation of the run, and
+**`The data output graph.png`** is the plot of the recorded state/torque data
+(generated with Matplotlib under the `fig/` outputs of the main repo).
+
+---
+
+## 3. Tooling & environment notes
+- Python + **mujoco 3.12.0**, numpy, matplotlib, glfw in a Conda env `pendulum-pid`
+  (see `environment.yml` in the repo root).
+- Files were transferred and run inside the guest through VMWare Tool commands; CRLF→LF
+  fixes were needed for multi-line bash scripts created on Windows.
+
+---
+
+## 4. What’s in this folder
+- `Animation for the output.gif` — recorded animation of a swing-up run.
+- `The data output graph.png` — corresponding data plot.
+- `work_summary.txt` — this file.
+
+*Prepared for a personal (private-try) learning record; generated as an assisted
+experiment log.*
